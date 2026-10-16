@@ -1,0 +1,48 @@
+# Marine Ruez · Designer freelance à Nancy
+
+> Marine Ruez est designer freelance basée à Nancy (Grand Est, France), avec un double profil de designer et d'informaticienne. Elle aide les petites structures (artisans, commerçants, indépendants, associations, cabinets) à attirer plus de clients grâce à une image unique et soignée (identité visuelle, site web, supports imprimés), et à gagner du temps grâce aux automatisations et à l'IA. Elle intervient à Nancy et partout en France, à distance. 10 ans d'expérience dans l'informatique de santé, 6 ans en indépendante.
+
+## Ce qu'elle apporte
+
+- Donner envie : une identité visuelle et un site web uniques, loin des visuels génériques produits par l'IA.
+- Marquer les esprits : des supports imprimés soignés (cartes de visite, flyers, kakémonos, plaquettes).
+- Libérer du temps : automatisations et IA là où la structure perd du temps (demandes clients triées et résumées, réponses immédiates, relances de devis, demandes d'avis Google, newsletters, assistant IA qui répond à partir des documents de la structure).
+
+## Services
+
+- Création de site web : site vitrine, landing pages, refonte, design pensé pour le mobile.
+- Identité visuelle : logo, couleurs, typographies, charte graphique.
+- Design UX et UI : interfaces de logiciels, parcours utilisateurs, prototypes, vision produit.
+- Supports imprimés : kakémonos, flyers, affiches, plaquettes, cartes de visite, livrés prêts pour l'imprimeur.
+- Automatisation de newsletter et de la communication externe : newsletters, emails de bienvenue, invitations et rappels d'événements, demandes d'avis, diffusion automatique des articles sur LinkedIn, Facebook et dans la newsletter.
+- Organisation de la communication interne : messagerie d'équipe, documents partagés, diffusion des actualités, procédures centralisées.
+
+## Méthode
+
+1. Analyse du besoin : objectifs, outils et quotidien du client.
+2. Réalisation : plusieurs propositions, puis design, réalisation et mise en place des automatisations.
+3. Formation : le client est formé à ses nouveaux outils pour être autonome.
+
+## Outils
+
+Brevo, Mailchimp, Canva, Notion, Buffer, Metricool, Calendly, Google Workspace, Microsoft 365, Slack.
+
+## Réalisations
+
+- Un logiciel simple pour les pharmaciens (logiciel pour pharmacies) : conception du logiciel avec les pharmaciens, de la vision produit à l'UX et l'UI.
+- Des supports imprimés qu'on garde (cabinet de recrutement) : kakémono, flyers et cartes de visite pour les salons.
+- Retrouver le bon document en quelques secondes (éditeur de logiciel) : assistant IA qui répond aux questions à partir de la documentation de l'équipe (RAG).
+- Une identité qui inspire confiance (chirurgien orthopédiste) : logo, charte graphique et site web.
+- Dessiné à la main (projet personnel) : illustrations sur mesure à la tablette graphique pour un livre.
+- Des tâches répétitives qui se font seules (éditeur de logiciel) : maquettes créées par une IA qui respecte la charte graphique, articles publiés sur le site à partir d'un email, envois d'emails automatiques et suivis.
+- Une image reconnaissable partout (réseau de recherche sur le vieillissement) : identité visuelle déclinée sur le site web, les flyers, les cartes de visite, les kakémonos et les réseaux sociaux.
+- Un site qui parle à chaque client (courtier en assurances) : site vitrine et une landing page par offre.
+
+## Contact
+
+- Email : marine.ruez8@gmail.com
+- Téléphone : 06 89 68 98 04
+- Site : https://marineruez.fr/
+- Formulaire de contact : https://marineruez.fr/#contact
+- LinkedIn : https://www.linkedin.com/in/marine-ruez-2370468b/
+- Zone : Nancy, Grand Est, et toute la France à distance
