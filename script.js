@@ -76,6 +76,7 @@ const cardFront = $(".print-card--front");
 const printFlyer = $(".print-flyer");
 const crops = $(".crops");
 const printNote = $(".print-note");
+const storySegs = $$(".story-bar span");
 
 const dests = {
   inbox: { el: $(".dest-inbox"), x: 100, y: 230 },
@@ -121,6 +122,10 @@ function renderStory() {
   const p3 = clamp((p - 0.68) / 0.3);  // automatisation
 
   setStep(p < 0.34 ? 0 : p < 0.66 ? 1 : 2);
+
+  // téléphone : chaque segment de la barre se remplit pendant son étape ; l'invitation disparaît dès le début
+  storySegs.forEach((seg, i) => seg.style.setProperty("--f", clamp(p * 3 - i)));
+  story.classList.toggle("is-started", p > 0.02);
 
   // --- 1. croquis : les traits se dessinent
   const n = sketchPaths.length;
@@ -277,6 +282,8 @@ window.addEventListener("resize", () => {
   renderStory();
 });
 fitStage();
+// recalcule l'échelle de l'animation dès que son cadre change de taille (chargement, rotation du téléphone…)
+if ("ResizeObserver" in window) new ResizeObserver(fitStage).observe(stageWrap);
 renderStory();
 renderCloud();
 renderMethod();

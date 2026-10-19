@@ -736,6 +736,104 @@ a.project-link:hover h3 { color: var(--accent); }
   .project-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* =========================================================
+   Téléphone : mise en page simplifiée
+   (les animations au défilement restent sur ordinateur et tablette)
+   ========================================================= */
+.nav-rdv, .story-bar, .story-hint { display: none; }
+
+@media (max-width: 900px) {
+  /* menu : lien de rendez-vous mis en avant */
+  .nav .nav-rdv { display: block; color: var(--accent); font-weight: 700; border-bottom: 0; }
+
+  /* haut de page : le texte d'abord, l'illustration ensuite, entière */
+  .hero { min-height: 0; padding-top: 92px; padding-bottom: 56px; row-gap: 8px; }
+  .hero h1 { font-size: clamp(44px, 12vw, 64px); }
+  .hero-lead { font-size: clamp(22px, 6vw, 28px); margin-top: 14px; }
+  .hero-sub { font-size: 16px; }
+  .hero-ctas { margin-top: 26px; gap: 18px 24px; }
+  .collage {
+    order: 0; justify-self: start; width: min(74%, 360px); max-width: none;
+    margin: 36px 0 0 0; /* le « M » et le « r » dépassent à droite : la composition tient dans l'écran */
+  }
+  .vertical-text { display: none; }
+  /* coordonnées : une ligne chacune, faciles à toucher */
+  .hero-info { margin-top: 28px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .hero-info > div {
+    display: flex; align-items: baseline; gap: 12px; margin: 0; padding: 12px 0;
+    border: 0; border-bottom: 1px solid var(--line);
+  }
+  .hero-info dt { flex: none; width: 104px; font-size: 15px; }
+  .hero-info dd { margin: 0; font-size: 16px; }
+  .hero-info a { display: inline-block; padding: 4px 0; }
+}
+
+@media (max-width: 760px) {
+  /* « Ce que je fais » : animation au défilement conservée.
+     Pas d'onglets : seule l'étape en cours est affichée, comme un chapitre, et la suivante arrive en fondu. */
+  .story { height: 250vh; }
+  /* texte + barre + animation forment un seul bloc, centré dans l'écran (plus d'espace vide entre eux) */
+  .story-sticky { display: flex; flex-direction: column; justify-content: center; align-items: stretch; gap: 0; padding-top: 72px; padding-bottom: 12px; }
+  .story-head { min-height: 250px; position: relative; display: flex; flex-direction: column; } /* hauteur fixe : l'animation ne saute pas quand le texte change */
+  .story-caption { display: none !important; }
+  /* animation sur toute la largeur de l'écran, à sa taille maximale (fitStage dans script.js) */
+  .stage-wrap { flex: none; height: auto; aspect-ratio: 760 / 600; margin-inline: calc(-1 * var(--gutter)); }
+  /* barre de progression en 3 segments, comme des « stories » */
+  .story-bar { display: flex; gap: 6px; margin-top: auto; padding-top: 16px; } /* toujours au même endroit, sous le texte */
+  .story-bar span { flex: 1; height: 3px; border-radius: 3px; background: #e4e4ea; overflow: hidden; }
+  .story-bar span::after {
+    content: ""; display: block; height: 100%; background: var(--accent);
+    transform-origin: left; transform: scaleX(var(--f, 0));
+  }
+  .story-hint {
+    display: block; position: absolute; left: 0; right: 0; bottom: -34px; text-align: center;
+    font-size: 14px; font-weight: 500; color: var(--muted); transition: opacity .4s;
+    animation: hint-bob 1.6s ease-in-out infinite;
+  }
+  .story.is-started .story-hint { opacity: 0; }
+  @keyframes hint-bob { 50% { transform: translateY(5px); } }
+  .verbs { display: block; margin-top: 4px; }
+  .verb { display: none; padding: 0; border: 0; }
+  .verb.is-active { display: block; animation: chapter-in .5s ease both; }
+  .verb h2 { font-size: 26px; color: var(--ink); gap: 10px; }
+  .verb-num { display: inline; font-size: 13px; color: var(--accent); }
+  .verb-num::after { content: " / 03"; color: var(--muted); }
+  .verb p, .verb .verb-body { display: block; max-height: none; opacity: 1; overflow: visible; margin-top: 8px; font-size: 16px; }
+  @keyframes chapter-in { from { opacity: 0; transform: translateY(12px); } }
+
+  /* exemples « Quand… alors… » : une rangée qu'on fait défiler du doigt.
+     Chaque exemple = une tuile blanche (la question) puis une tuile noire (la réponse), sans retournement. */
+  .auto-grid {
+    display: flex; gap: 12px; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+    margin-inline: calc(-1 * var(--gutter)); padding: 4px var(--gutter) 16px;
+    scrollbar-width: none;
+  }
+  .auto-grid::-webkit-scrollbar { display: none; }
+  .flip-card { flex: none; height: auto; perspective: none; cursor: default; }
+  .flip-inner { display: flex; gap: 12px; transform: none !important; transition: none; }
+  .flip-face {
+    position: relative; inset: auto; flex: none; width: 76vw; max-width: 320px; height: 220px;
+    backface-visibility: visible; -webkit-backface-visibility: visible; scroll-snap-align: start;
+  }
+  .flip-back { transform: none; }
+  .flip-hint { display: none; }
+  .flip-back .auto-then { font-size: 16px; }
+  .auto-card--cta { flex: none; width: 76vw; max-width: 320px; min-height: 220px; scroll-snap-align: start; }
+
+  /* méthode : animation conservée (une étape par écran, le dessin se trace) ; textes un peu plus grands */
+  .mstep-num { font-size: 110px; }
+  .mstep-text p:last-child { font-size: 16px; }
+  .mstep-art { max-height: 36vh; }
+
+  /* confort de lecture */
+  .project-body > p:not(.project-client) { font-size: 16px; }
+  .lead { font-size: 17px; }
+  .section-head { margin-bottom: 36px; }
+  .footer { flex-direction: column; gap: 8px; }
+  .footer a { display: inline-block; padding: 6px 0; }
+}
+
 /* Visionneuse des images de projets */
 .lightbox {
   position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 48px 24px;
