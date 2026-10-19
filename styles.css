@@ -740,7 +740,8 @@ a.project-link:hover h3 { color: var(--accent); }
    Téléphone : mise en page simplifiée
    (les animations au défilement restent sur ordinateur et tablette)
    ========================================================= */
-.nav-rdv, .story-bar, .story-hint { display: none; }
+.nav-rdv, .story-bar, .story-hint, .mstep-bar { display: none; }
+.stage-row { display: contents; } /* sur ordinateur, l'animation reste un élément direct de la grille */
 
 @media (max-width: 900px) {
   /* menu : lien de rendez-vous mis en avant */
@@ -779,12 +780,22 @@ a.project-link:hover h3 { color: var(--accent); }
   /* animation sur toute la largeur de l'écran, à sa taille maximale (fitStage dans script.js) */
   .stage-wrap { flex: none; height: auto; aspect-ratio: 760 / 600; margin-inline: calc(-1 * var(--gutter)); }
   /* barre de progression en 3 segments, comme des « stories » */
-  .story-bar { display: flex; gap: 6px; margin-top: auto; padding-top: 16px; } /* toujours au même endroit, sous le texte */
-  .story-bar span { flex: 1; height: 3px; border-radius: 3px; background: #e4e4ea; overflow: hidden; }
-  .story-bar span::after {
-    content: ""; display: block; height: 100%; background: var(--accent);
-    transform-origin: left; transform: scaleX(var(--f, 0));
+  /* jauges verticales juste à côté du contenu : elles se remplissent vers le bas, on voit qu'on descend dans la page */
+  .stage-row { display: flex; align-items: stretch; gap: 10px; margin-left: calc(-1 * var(--gutter)); }
+  .stage-row .stage-wrap { flex: 1 1 auto; min-width: 0; margin-inline: 0; }
+  .story-bar { display: flex; flex-direction: column; gap: 6px; flex: none; width: 5px; }
+  .story-bar span, .mstep-bar { border-radius: 5px; background: #dcdce3; overflow: hidden; }
+  .story-bar span { flex: 1; }
+  .story-bar span::after, .mstep-bar span {
+    content: ""; display: block; width: 100%; height: 100%; background: var(--accent);
+    transform-origin: top; transform: scaleY(var(--f, 0));
   }
+  .method-bar { display: none; }
+  .mstep { grid-template-columns: auto minmax(0, 1fr) 5px; column-gap: 14px; }
+  .mstep-art { grid-column: 1 / 3; }
+  .mstep-bar { display: block; grid-column: 3; grid-row: 1 / 3; align-self: stretch; width: 5px; transition: opacity .4s; }
+  .mstep-bar span { transform: scaleY(var(--p, 0)); }
+  .mstep:not(.is-active) .mstep-bar { opacity: 0; }
   .story-hint {
     display: block; position: absolute; left: 0; right: 0; bottom: -34px; text-align: center;
     font-size: 14px; font-weight: 500; color: var(--muted); transition: opacity .4s;

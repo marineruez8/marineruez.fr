@@ -210,11 +210,12 @@
             </li>
           </ol>
           <p class="story-caption" id="storyCaption" aria-hidden="true"></p>
-          <!-- téléphone : barre de progression en 3 segments + invitation à faire défiler -->
-          <div class="story-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+          <!-- téléphone : invitation à faire défiler -->
           <p class="story-hint" aria-hidden="true">Faites défiler ↓</p>
         </div>
 
+        <!-- animation + jauge (la rangée ne compte pas sur ordinateur : display: contents) -->
+        <div class="stage-row">
         <div class="stage-wrap">
           <div class="stage" id="stage" aria-hidden="true">
 
@@ -329,6 +330,9 @@
             <p class="sent-note">envoyé tout seul, à 9h00 ✓</p>
           </div>
         </div>
+        <!-- téléphone : jauge verticale en 3 segments, juste à droite de l’animation -->
+        <div class="story-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
       </div>
     </section>
 
@@ -403,6 +407,7 @@
           <!-- Étape 1 -->
           <article class="mstep">
             <span class="mstep-num" aria-hidden="true">1</span>
+            <span class="mstep-bar" aria-hidden="true"><span></span></span>
             <div class="mstep-text">
               <p class="mstep-kicker">Étape 01</p>
               <h3>Analyse du besoin</h3>
@@ -416,6 +421,7 @@
           <!-- Étape 2 -->
           <article class="mstep">
             <span class="mstep-num" aria-hidden="true">2</span>
+            <span class="mstep-bar" aria-hidden="true"><span></span></span>
             <div class="mstep-text">
               <p class="mstep-kicker">Étape 02</p>
               <h3>Réalisation</h3>
@@ -429,6 +435,7 @@
           <!-- Étape 3 -->
           <article class="mstep">
             <span class="mstep-num" aria-hidden="true">3</span>
+            <span class="mstep-bar" aria-hidden="true"><span></span></span>
             <div class="mstep-text">
               <p class="mstep-kicker">Étape 03</p>
               <h3>Formation</h3>

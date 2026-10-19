@@ -237,7 +237,6 @@ function renderCloud() {
 const methodSection = $("#methode");
 const methodSteps = $$(".mstep", methodSection);
 const methodDots = $$(".method-progress li", methodSection);
-const methodBar = $(".method-bar", methodSection);
 // chaque trait d’illustration se dessine à son tour (le dessin vectorisé de l’étape 1 a ses délais intégrés)
 methodSteps.forEach((step) => $$(".mstep-art--traced .lines path", step).forEach((p) => p.setAttribute("pathLength", "1")));
 methodSteps.forEach((step) =>
@@ -252,7 +251,7 @@ function renderMethod() {
   const rect = methodSection.getBoundingClientRect();
   const total = methodSection.offsetHeight - window.innerHeight;
   const p = clamp(-rect.top / total);
-  methodBar.style.setProperty("--p", p);
+  methodSection.style.setProperty("--p", p); // jauges : barre du bas (ordinateur) et jauge à côté de chaque étape (téléphone)
   // l'étape 1 s'affiche dès que la section arrive à l'écran
   const step = rect.top > window.innerHeight * 0.6 ? -1 : Math.min(methodSteps.length - 1, Math.floor(p * methodSteps.length));
   if (step === methodStep) return;
