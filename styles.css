@@ -771,7 +771,7 @@ a.project-link:hover h3 { color: var(--accent); }
 @media (max-width: 760px) {
   /* « Ce que je fais » : animation au défilement conservée.
      Pas d'onglets : seule l'étape en cours est affichée, comme un chapitre, et la suivante arrive en fondu. */
-  .story { height: 250vh; }
+  .story { height: 450vh; } /* ~1,5 écran de défilement par étape : le temps de lire et de voir l’animation */
   /* texte + barre + animation forment un seul bloc, centré dans l'écran (plus d'espace vide entre eux) */
   .story-sticky { display: flex; flex-direction: column; justify-content: center; align-items: stretch; gap: 0; padding-top: 72px; padding-bottom: 12px; }
   .story-head { min-height: 250px; position: relative; display: flex; flex-direction: column; } /* hauteur fixe : l'animation ne saute pas quand le texte change */
@@ -822,6 +822,8 @@ a.project-link:hover h3 { color: var(--accent); }
   .auto-card--cta { flex: none; width: 76vw; max-width: 320px; min-height: 220px; scroll-snap-align: start; }
 
   /* méthode : animation conservée (une étape par écran, le dessin se trace) ; textes un peu plus grands */
+  .method { height: 450vh; } /* plus de défilement par étape, le dessin a le temps de se tracer */
+  .tools { height: 180vh; } /* le nuage de mots se remplit moins vite */
   .mstep-num { font-size: 110px; }
   .mstep-text p:last-child { font-size: 16px; }
   .mstep-art { max-height: 36vh; }
