@@ -10,7 +10,7 @@ const CONTACT_EMAIL = "marine.ruez8@gmail.com";
 /* Facultatif : URL "action" d'un formulaire Brevo, pour ajouter aussi
    le visiteur à une liste Brevo (Brevo > Contacts > Formulaires >
    Partager > "Code HTML intégré" : https://….sibforms.com/serve/…) */
-const BREVO_FORM_URL = "";
+const BREVO_FORM_URL = "https://671203b5.sibforms.com/serve/MUIFACG4nD_L-6kw2IF1ouSsNX5KIh9ZmjgvZ1ZipQVJacXvA25uds0dVJjiB_snMy0RiiY7LcEQW-MWTPj122qjUxkmJ_PgLGATlCMEV7sVCvEQRztT3tjhKoDuHqlj8hgyvtqX30Cer_L_M6j3vaY27BoUkKxTq4I3Iv306LT3Ov2TZJtZcx8WrDprcIAlxrpVw6kRrDogFdsOSw==";
 
 /* ---------- utilitaires ---------- */
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -422,7 +422,7 @@ form.addEventListener("submit", async (ev) => {
   statusEl.className = "form-status";
   statusEl.textContent = "";
 
-  const name = form.FIRSTNAME, email = form.EMAIL, consent = form.OPT_IN;
+  const name = form.PRENOM, email = form.EMAIL, consent = form.OPT_IN;
   let ok = true;
   [name, email].forEach((input) => {
     const bad = !input.value.trim() || !input.checkValidity();
@@ -444,8 +444,12 @@ form.addEventListener("submit", async (ev) => {
 
   try {
     // Brevo ne renvoie pas d'en-têtes CORS : envoi en "no-cors" (réponse opaque)
+    // Le visiteur est ajouté à la liste Brevo, qui lui envoie l'email automatique
     if (BREVO_FORM_URL) {
-      fetch(BREVO_FORM_URL, { method: "POST", mode: "no-cors", body: new FormData(form) }).catch(console.error);
+      const brevoData = new FormData(form);
+      // MESSAGE est obligatoire dans le formulaire Brevo
+      if (!brevoData.get("MESSAGE").trim()) brevoData.set("MESSAGE", "(pas de message)");
+      fetch(BREVO_FORM_URL, { method: "POST", mode: "no-cors", body: brevoData }).catch(console.error);
     }
 
     const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
@@ -459,7 +463,6 @@ form.addEventListener("submit", async (ev) => {
         _replyto: email.value.trim(),
         _template: "table",
         _honey: form.email_address_check.value,
-        _autoresponse: `Bonjour ${name.value.trim()},\n\nMerci pour votre message, je l’ai bien reçu et je vous réponds rapidement.\n\nMarine Ruez\nDesigner freelance · marineruez.fr`,
       }),
     });
     const data = await res.json().catch(() => ({}));
