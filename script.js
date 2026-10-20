@@ -1,10 +1,15 @@
 /* =========================================================
    CONFIGURATION
    ---------------------------------------------------------
-   Collez ici l'URL "action" de votre formulaire Brevo
-   (Brevo > Contacts > Formulaires > votre formulaire > Partager >
-   "Code HTML intégré" : l'URL commence par https://….sibforms.com/serve/…)
+   Les messages du formulaire de contact arrivent sur cette adresse
+   (envoi par FormSubmit.co ; au tout premier envoi, cliquer sur
+   le lien "Activate Form" reçu dans cette boîte mail).
    ========================================================= */
+const CONTACT_EMAIL = "marine.ruez8@gmail.com";
+
+/* Facultatif : URL "action" d'un formulaire Brevo, pour ajouter aussi
+   le visiteur à une liste Brevo (Brevo > Contacts > Formulaires >
+   Partager > "Code HTML intégré" : https://….sibforms.com/serve/…) */
 const BREVO_FORM_URL = "";
 
 /* ---------- utilitaires ---------- */
@@ -438,9 +443,28 @@ form.addEventListener("submit", async (ev) => {
   btn.textContent = "Envoi…";
 
   try {
-    if (!BREVO_FORM_URL) throw new Error("BREVO_FORM_URL non configurée");
     // Brevo ne renvoie pas d'en-têtes CORS : envoi en "no-cors" (réponse opaque)
-    await fetch(BREVO_FORM_URL, { method: "POST", mode: "no-cors", body: new FormData(form) });
+    if (BREVO_FORM_URL) {
+      fetch(BREVO_FORM_URL, { method: "POST", mode: "no-cors", body: new FormData(form) }).catch(console.error);
+    }
+
+    const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        Prénom: name.value.trim(),
+        email: email.value.trim(),
+        Message: form.MESSAGE.value.trim() || "(pas de message)",
+        _subject: `Nouveau message du site : ${name.value.trim()}`,
+        _replyto: email.value.trim(),
+        _template: "table",
+        _honey: form.email_address_check.value,
+        _autoresponse: `Bonjour ${name.value.trim()},\n\nMerci pour votre message, je l’ai bien reçu et je vous réponds rapidement.\n\nMarine Ruez\nDesigner freelance · marineruez.fr`,
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || String(data.success) !== "true") throw new Error(data.message || `HTTP ${res.status}`);
+
     form.classList.add("is-sent");
     btn.textContent = "Envoyé ✓";
     statusEl.classList.add("ok");
