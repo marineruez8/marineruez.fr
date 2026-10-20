@@ -1,11 +1,10 @@
 /* =========================================================
    CONFIGURATION
    ---------------------------------------------------------
-   Les messages du formulaire de contact arrivent sur cette adresse
-   (envoi par FormSubmit.co ; au tout premier envoi, cliquer sur
-   le lien "Activate Form" reçu dans cette boîte mail).
+   Clé d'accès Web3Forms (web3forms.com) : les messages du formulaire
+   de contact arrivent sur marine.ruez8@gmail.com.
    ========================================================= */
-const CONTACT_EMAIL = "marine.ruez8@gmail.com";
+const WEB3FORMS_KEY = "4105044f-8d87-4842-a840-01d2a4bdf342";
 
 /* Facultatif : URL "action" d'un formulaire Brevo, pour ajouter aussi
    le visiteur à une liste Brevo (Brevo > Contacts > Formulaires >
@@ -452,17 +451,17 @@ form.addEventListener("submit", async (ev) => {
       fetch(BREVO_FORM_URL, { method: "POST", mode: "no-cors", body: brevoData }).catch(console.error);
     }
 
-    const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+    const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: `Nouveau message du site : ${name.value.trim()}`,
+        from_name: "Site marineruez.fr",
+        botcheck: form.email_address_check.value,
         Prénom: name.value.trim(),
         email: email.value.trim(),
         Message: form.MESSAGE.value.trim() || "(pas de message)",
-        _subject: `Nouveau message du site : ${name.value.trim()}`,
-        _replyto: email.value.trim(),
-        _template: "table",
-        _honey: form.email_address_check.value,
       }),
     });
     const data = await res.json().catch(() => ({}));
