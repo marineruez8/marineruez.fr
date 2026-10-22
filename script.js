@@ -477,7 +477,7 @@ form.addEventListener("submit", async (ev) => {
     btn.disabled = false;
     btn.textContent = "Envoyer";
     statusEl.classList.add("err");
-    statusEl.textContent = "L’envoi n’a pas fonctionné. Vous pouvez m’écrire directement à marine.ruez8@gmail.com.";
+    statusEl.textContent = "L’envoi n’a pas fonctionné. Vous pouvez m’écrire directement à contact@marineruez.fr.";
   }
 });
 
