@@ -639,25 +639,98 @@ a.project-link:hover h3 { color: var(--accent); }
 .auto-static strong { color: var(--ink); }
 
 /* ---------- Offres ---------- */
-.offers { padding-top: 0; }
-.offer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; align-items: stretch; }
-.offer {
-  display: flex; flex-direction: column; gap: 12px;
-  padding: 30px 26px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius);
+/* Cartes façon « pricing » : illustration, titre souligné, coches, vagues de couleur et bouton arrondi.
+   Chaque carte a sa couleur : --c1 (vague claire) et --c2 (vague foncée, soulignés, coches). */
+.offers { background: var(--bg-soft); }
+.offers + .faq { padding-top: clamp(80px, 11vw, 140px); }
+/* 5 cartes sur une ligne ; sur écran moyen : 3 en haut, 2 centrées en dessous (grille de 6 colonnes) */
+.offer-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 48px 20px; align-items: stretch; }
+@media (min-width: 1201px) {
+  .offer { padding: 26px 22px 0; }
+  .offer h3 { font-size: 20px; }
+  .offer-art { height: 64px; }
+  .offer-foot { margin: auto -22px 0; }
+  .offer-cta { padding: 11px 22px; }
 }
-.offer h3 { font-size: 21px; font-weight: 700; }
-.offer-price { font-family: var(--serif); font-size: 38px; line-height: 1.1; color: var(--ink); }
-.offer-price span { display: block; font-family: var(--font); font-size: 13px; font-weight: 500; letter-spacing: .04em; color: var(--muted); }
+@media (max-width: 1200px) {
+  .offer-grid { grid-template-columns: repeat(6, 1fr); gap: 48px 28px; }
+  .offer-grid > .offer { grid-column: span 2; }
+  .offer-grid > .offer:nth-child(4) { grid-column: 2 / span 2; }
+}
+@media (max-width: 1000px) {
+  .offer-grid { grid-template-columns: repeat(2, 1fr); }
+  .offer-grid > .offer, .offer-grid > .offer:nth-child(4) { grid-column: auto; }
+}
+@media (max-width: 640px) { .offer-grid { grid-template-columns: 1fr; } }
+.offer--rose   { --c1: #f7c3d4; --c2: #ef8fb0; }
+.offer--mint   { --c1: #bfe3dc; --c2: #6fbfae; }
+.offer--peach  { --c1: #f9d3c6; --c2: #f0a088; }
+.offer--sky    { --c1: #c4dde6; --c2: #6f9fb1; }
+.offer--accent { --c1: #f7b3c4; --c2: var(--accent); }
+.offer {
+  position: relative; display: flex; flex-direction: column; gap: 14px;
+  padding: 28px 30px 0; background: #fff; border-radius: 6px; overflow: hidden;
+  box-shadow: 0 18px 40px -22px rgba(43, 43, 46, .28);
+}
+.offer.reveal { transition: opacity .7s ease, transform .7s ease, translate .3s ease, box-shadow .3s ease; }
+.offer-art { height: 72px; margin-bottom: 2px; align-self: flex-start; }
+.offer--featured .offer-art { margin-top: 18px; }
+.offer-art img, .offer-art svg { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+/* dessins au trait fin, couleur encre, sans fond */
+.offer-art svg * { fill: none; stroke: color-mix(in srgb, var(--ink) 65%, #fff); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.offer-art svg .fine { stroke-width: .9; }
+.offer-art svg .key { stroke-width: .6; }
+.offer-art svg .ground { stroke-width: 1; opacity: .35; }
+/* les dessins se tracent trait par trait quand la carte apparaît (--d : ordre du trait) */
+.offer-art svg * { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset .7s ease, opacity .3s ease; }
+.offer.is-in .offer-art svg * { stroke-dashoffset: 0; opacity: 1; transition-delay: calc(var(--d, 0s) + .35s); }
+@media (prefers-reduced-motion: reduce) {
+  .offer-art svg * { stroke-dashoffset: 0; opacity: 1; transition: none; }
+}
+.offer h3 { font-size: 22px; font-weight: 700; line-height: 1.2; }
+.offer h3::after { content: ""; display: block; width: 34px; height: 2px; margin-top: 14px; background: var(--c2); }
 .offer-desc { color: var(--ink-soft); font-size: 16px; }
-.offer ul { display: grid; gap: 8px; margin-top: 6px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-soft); }
-.offer li { position: relative; padding-left: 22px; }
-.offer li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
-.offer--featured { background: var(--accent-soft); border-color: var(--accent); }
-.offer--featured ul { border-top-color: var(--rose); }
-.offer--featured .btn { margin-top: auto; padding: 13px 24px; }
-.offer--featured ul { margin-bottom: 10px; }
-.offer-tag { align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 4px 10px; border-radius: 2px; }
-.offer-note { margin-top: 32px; color: var(--ink-soft); }
+.offer ul { display: grid; gap: 10px; margin: 4px 0 8px; font-size: 15px; color: var(--ink-soft); }
+.offer li { position: relative; padding-left: 26px; }
+.offer li::before { content: "✓"; position: absolute; left: 0; color: var(--c2); font-weight: 700; }
+.offer-foot { position: relative; margin: auto -30px 0; height: 130px; }
+/* les vagues sont dessinées plus larges et plus profondes que la carte (coupées par overflow: hidden) :
+   même quand elles bougent au survol, aucun bord blanc n'apparaît */
+.offer-wave { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.offer-wave .w1 { fill: var(--c1); opacity: .45; }
+.offer-wave .w2 { fill: var(--c1); }
+.offer-wave .w3 { fill: var(--c2); opacity: .85; }
+.offer-cta {
+  position: absolute; left: 50%; bottom: 24px; translate: -50% 0;
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  padding: 11px 30px; background: #fff; border-radius: 999px; text-decoration: none;
+  font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c2);
+  box-shadow: 0 6px 18px -8px rgba(43, 43, 46, .35); transition: background .2s, color .2s;
+}
+.offer-cta::after { content: "›"; font-size: 18px; line-height: 1; }
+.offer-cta:hover { background: var(--c2); color: #fff; }
+.offer--featured { translate: 0 -18px; box-shadow: 0 28px 60px -24px rgba(236, 28, 79, .4); }
+.offer-tag { position: absolute; top: 18px; right: 18px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 4px 10px; border-radius: 999px; }
+/* survol : les vagues ondulent, le trait s'allonge, le bouton se colore ;
+   la carte ne se soulève pas, pour rester alignée avec ses voisines */
+.offer h3::after { transition: width .35s ease; }
+.offer-art img, .offer-art svg { transition: transform .45s cubic-bezier(.2, .8, .2, 1); transform-origin: left top; }
+.offer-wave path { transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.offer-cta { transition: background .25s, color .25s, box-shadow .25s; }
+@media (hover: hover) {
+  .offer:hover { box-shadow: 0 34px 60px -26px color-mix(in srgb, var(--c2) 55%, transparent); }
+  .offer:hover h3::after { width: 72px; }
+  .offer:hover .offer-art img, .offer:hover .offer-art svg { transform: scale(1.06) rotate(-1.5deg); }
+  .offer:hover .offer-wave .w1 { transform: translate(-12px, -14px); }
+  .offer:hover .offer-wave .w2 { transform: translate(10px, -9px); }
+  .offer:hover .offer-wave .w3 { transform: translateY(-5px); }
+  .offer:hover .offer-cta { background: var(--c2); color: #fff; box-shadow: 0 10px 24px -10px var(--c2); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offer h3::after, .offer-art img, .offer-art svg, .offer-wave path { transition: none; }
+}
+@media (max-width: 640px) { .offer--featured { translate: none; } }
+.offer-note { margin-top: 40px; color: var(--ink-soft); }
 .offer-note a { color: var(--accent); font-weight: 500; }
 
 /* ---------- Questions fréquentes ---------- */
