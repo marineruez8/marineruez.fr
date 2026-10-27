@@ -31,7 +31,7 @@ Brevo, Mailchimp, Canva, Notion, Buffer, Metricool, Calendly, Google Workspace, 
 
 ## Réalisations
 
-- Un logiciel simple pour les pharmaciens (logiciel pour pharmacies) : conception du logiciel avec les pharmaciens, de la vision produit à l'UX et l'UI.
+- Un logiciel pour prendre des rdv en ligne (logiciel de prise de rendez-vous) : conception du logiciel avec ses utilisateurs, de la vision produit à l'UX et l'UI.
 - Des supports imprimés qu'on garde (cabinet de recrutement) : kakémono, flyers et cartes de visite pour les salons.
 - Retrouver le bon document en quelques secondes (éditeur de logiciel) : assistant IA qui répond aux questions à partir de la documentation de l'équipe (RAG).
 - Une identité qui inspire confiance (chirurgien orthopédiste) : logo, charte graphique et site web.

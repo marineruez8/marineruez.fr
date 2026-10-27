@@ -514,3 +514,127 @@ $$(".project-link").forEach((link) => {
 });
 lightbox.addEventListener("click", (e) => { if (e.target !== lightboxImg) closeLightbox(); });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lightbox.hidden) closeLightbox(); });
+
+/* =========================================================
+   Logo Datanello : construction en 3D, travelling de caméra,
+   passage de lumière, puis le vrai logo fixe et net
+   ========================================================= */
+const dnStage = $("#dn-stage");
+if (dnStage && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && Element.prototype.animate) {
+  const LOGO_W = 3583;
+  const world = $(".dn-world", dnStage);
+  const logo = $(".dn-logo", dnStage);
+  const add = (html, parent = logo) => (parent.insertAdjacentHTML("beforeend", html), parent.lastElementChild);
+
+  // décor : halo
+  const glow = add('<div class="dn-glow" aria-hidden="true"></div>', dnStage);
+  const shadow = add('<div class="dn-shadow" aria-hidden="true"></div>');
+
+  // tracés de construction (contours du symbole et lignes du texte), en coordonnées de l'image d'origine
+  const guides = add(`<svg class="dn-guides" viewBox="0 0 3583 1013" preserveAspectRatio="none" aria-hidden="true">
+    <polygon pathLength="1" points="0,59 218,0 218,519 0,671"/>
+    <polygon pathLength="1" points="219,0 705,339 514,472 219,266"/>
+    <polygon pathLength="1" points="0,831 705,340 705,606 125,1012"/>
+    <line pathLength="1" x1="-200" y1="378" x2="3783" y2="378"/>
+    <line pathLength="1" x1="3783" y1="756" x2="-200" y2="756"/>
+  </svg>`);
+
+  // les 3 morceaux du symbole : chacun est découpé à partir des pixels du logo, couleurs exactes
+  const pieces = [
+    { name: "bar", origin: "50% 66%", from: "translate3d(-40%,-120%,380px) rotateX(-80deg) rotateY(0deg) rotateZ(-10deg)", over: "translate3d(0%,4%,0px) rotateX(6deg) rotateY(0deg) rotateZ(0deg)", delay: 150 },
+    { name: "fold", origin: "30.4% 13%", from: "translate3d(10%,-30%,160px) rotateX(0deg) rotateY(-120deg) rotateZ(6deg)", over: "translate3d(0%,0%,0px) rotateX(0deg) rotateY(10deg) rotateZ(0deg)", delay: 450 },
+    { name: "band", origin: "50% 67%", from: "translate3d(-70%,55%,-600px) rotateX(30deg) rotateY(0deg) rotateZ(-18deg)", over: "translate3d(1.5%,-1%,0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg)", delay: 700 },
+  ].map((p) => ({ ...p, el: add(`<img class="dn-piece" src="assets/datanello/datanello-${p.name}.png" alt="" style="transform-origin:${p.origin}">`) }));
+
+  // les 8 lettres : bornes horizontales dans l'image d'origine
+  const cuts = [760, 1163, 1438, 1817, 2218, 2550, 2871, 3169, LOGO_W];
+  const letters = cuts.slice(0, -1).map((x0, i) => {
+    const x1 = cuts[i + 1], pct = (v) => ((v / LOGO_W) * 100).toFixed(3) + "%";
+    return add(`<div class="dn-letter" aria-hidden="true" style="clip-path:inset(0 ${pct(LOGO_W - x1)} 0 ${pct(x0)});transform-origin:${pct((x0 + x1) / 2)} 75%"></div>`);
+  });
+  const sheen = add('<div class="dn-sheen" aria-hidden="true"></div>');
+
+  const settle = "translate3d(0%,0%,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)";
+  const out = "cubic-bezier(.16,1,.3,1)";
+  let running = [];
+
+  const play = () => {
+    running.forEach((a) => a.cancel());
+    dnStage.classList.remove("is-done");
+    dnStage.classList.add("is-armed");
+    const go = (el, frames, opts) => { const a = el.animate(frames, { fill: "both", ...opts }); running.push(a); return a; };
+    running = [];
+
+    // caméra : part de loin et de biais, passe de l'autre côté, puis se cale de face
+    const cam = go(world, [
+      { transform: "translate3d(-6%,5%,-420px) rotateX(24deg) rotateY(-38deg) rotateZ(-4deg) scale(1)", easing: "cubic-bezier(.4,0,.3,1)" },
+      { transform: "translate3d(2%,-1%,-110px) rotateX(-6deg) rotateY(14deg) rotateZ(1deg) scale(1)", offset: 0.55, easing: "cubic-bezier(.3,0,.25,1)" },
+      { transform: "translate3d(0%,0%,10px) rotateX(1deg) rotateY(-2deg) rotateZ(0deg) scale(1.012)", offset: 0.86, easing: "cubic-bezier(.3,0,.3,1)" },
+      { transform: "translate3d(0%,0%,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1)" },
+    ], { duration: 3400 });
+
+    // tracés de construction : ils se dessinent, puis s'effacent quand la matière arrive
+    $$("polygon, line", guides).forEach((g, i) =>
+      go(g, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 900, delay: 80 + i * 90, easing: "cubic-bezier(.6,0,.2,1)" })
+    );
+    go(guides, [{ opacity: 0 }, { opacity: 0.7, offset: 0.15 }, { opacity: 0.7, offset: 0.6 }, { opacity: 0 }], { duration: 2100 });
+
+    // le symbole se construit morceau par morceau
+    pieces.forEach((p) =>
+      go(p.el, [
+        { transform: p.from, opacity: 0, filter: "drop-shadow(0px 40px 28px rgba(0,30,70,.35))" },
+        { transform: p.over, opacity: 1, filter: "drop-shadow(0px 12px 12px rgba(0,30,70,.18))", offset: 0.7 },
+        { transform: settle, opacity: 1, filter: "drop-shadow(0px 0px 0px rgba(0,30,70,0))" },
+      ], { duration: 1150, delay: p.delay, easing: out })
+    );
+
+    // les lettres tombent une à une depuis l'avant-plan
+    letters.forEach((el, i) =>
+      go(el, [
+        { transform: "translate3d(0%,-60%,520px) rotateX(-90deg)", opacity: 0, filter: "blur(8px)" },
+        { transform: "translate3d(0%,3%,0px) rotateX(8deg)", opacity: 1, filter: "blur(0px)", offset: 0.6 },
+        { transform: "translate3d(0%,0%,0px) rotateX(0deg)", opacity: 1, filter: "blur(0px)" },
+      ], { duration: 950, delay: 1100 + i * 80, easing: out })
+    );
+
+    // ombre portée : large et diffuse quand le logo est haut, nette à l'atterrissage, puis disparaît
+    go(shadow, [
+      { opacity: 0, transform: "scale(1.5)" },
+      { opacity: 0.8, transform: "scale(1.15)", offset: 0.45 },
+      { opacity: 1, transform: "scale(1)", offset: 0.82 },
+      { opacity: 0, transform: "scale(1)" },
+    ], { duration: 3700 });
+
+    // passage de lumière sur le logo, et halo quand il se pose
+    go(sheen, [
+      { opacity: 0, backgroundPosition: "120% 0" },
+      { opacity: 1, offset: 0.12 },
+      { opacity: 1, offset: 0.8 },
+      { opacity: 0, backgroundPosition: "-20% 0" },
+    ], { duration: 1000, delay: 2550, easing: "cubic-bezier(.45,0,.35,1)" });
+    go(glow, [
+      { opacity: 0, transform: "scale(.7)" },
+      { opacity: 1, transform: "scale(1.1)", offset: 0.35 },
+      { opacity: 0, transform: "scale(1.25)" },
+    ], { duration: 1200, delay: 2750, easing: "ease-out" });
+
+    // fin : on remplace les morceaux par le vrai logo, pour une image fixe et parfaitement nette
+    cam.finished.then(() => setTimeout(() => {
+      dnStage.classList.add("is-done");
+      dnStage.classList.remove("is-armed");
+      running.forEach((a) => a.cancel());
+      running = [];
+    }, 450)).catch(() => {});
+  };
+
+  dnStage.classList.add("is-armed");
+  const ready = Promise.all($$("img", dnStage).map((img) => img.decode().catch(() => {})));
+  const watcher = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    watcher.disconnect();
+    ready.then(play);
+  }, { threshold: 0.55 });
+  watcher.observe(dnStage);
+  // un clic sur le logo fini rejoue l'animation
+  dnStage.addEventListener("click", () => dnStage.classList.contains("is-done") && play());
+}

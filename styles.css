@@ -673,6 +673,15 @@ a.project-link:hover h3 { color: var(--accent); }
   box-shadow: 0 18px 40px -22px rgba(43, 43, 46, .28);
 }
 .offer.reveal { transition: opacity .7s ease, transform .7s ease, translate .3s ease, box-shadow .3s ease; }
+/* tuile qui tourne sur elle-même au survol (skill tuile-rotation) :
+   le décalage d'apparition ne s'applique qu'à l'opacité, pour que la rotation réponde tout de suite */
+.offer { transform-origin: 50% 50%; }
+.offer.reveal.is-in {
+  transition: opacity .7s ease, transform .5s cubic-bezier(.2, .8, .2, 1), translate .3s ease, box-shadow .5s ease;
+  transition-delay: var(--rd, 0s), 0s, 0s, 0s;
+}
+.offer:nth-child(2) { --rd: .08s; } .offer:nth-child(3) { --rd: .16s; }
+.offer:nth-child(4) { --rd: .24s; } .offer:nth-child(5) { --rd: .32s; }
 .offer-art { height: 72px; margin-bottom: 2px; align-self: flex-start; }
 .offer--featured .offer-art { margin-top: 18px; }
 .offer-art img, .offer-art svg { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
@@ -719,7 +728,8 @@ a.project-link:hover h3 { color: var(--accent); }
 .offer-cta { transition: background .25s, color .25s, box-shadow .25s; }
 @media (hover: hover) {
   .offer:hover { box-shadow: 0 34px 60px -26px color-mix(in srgb, var(--c2) 55%, transparent); }
-  .offer:hover h3::after { width: 72px; }
+  /* la carte tourne sur elle-même : le côté gauche vient vers l'avant, le droit recule */
+  .offer.is-in:hover { transform: perspective(900px) rotateY(10deg); }  .offer:hover h3::after { width: 72px; }
   .offer:hover .offer-art img, .offer:hover .offer-art svg { transform: scale(1.06) rotate(-1.5deg); }
   .offer:hover .offer-wave .w1 { transform: translate(-12px, -14px); }
   .offer:hover .offer-wave .w2 { transform: translate(10px, -9px); }
@@ -728,10 +738,151 @@ a.project-link:hover h3 { color: var(--accent); }
 }
 @media (prefers-reduced-motion: reduce) {
   .offer h3::after, .offer-art img, .offer-art svg, .offer-wave path { transition: none; }
+  .offer.reveal.is-in { transition: none; }
 }
 @media (max-width: 640px) { .offer--featured { translate: none; } }
 .offer-note { margin-top: 40px; color: var(--ink-soft); }
 .offer-note a { color: var(--accent); font-weight: 500; }
+
+/* ---------- Équipe : Datanello ---------- */
+.team-card {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(32px, 5vw, 80px); align-items: center;
+  background: var(--teal); color: #fff; border-radius: var(--radius); padding: clamp(32px, 5vw, 72px);
+}
+
+/* scène du logo Datanello : sol en perspective, caméra 3D, morceaux qui se construisent */
+.dn-stage {
+  grid-column: 1 / -1; position: relative; isolation: isolate; margin-bottom: calc(24px - clamp(32px, 5vw, 80px));
+  display: grid; justify-items: center; perspective: 1100px; perspective-origin: 50% 50%;
+}
+.dn-glow {
+  position: absolute; left: 50%; top: 50%; width: 520px; max-width: 100%; aspect-ratio: 3; translate: -50% -50%; z-index: -1; pointer-events: none; opacity: 0;
+  background: radial-gradient(closest-side, rgba(39, 171, 225, .32), transparent);
+}
+.dn-world { position: relative; width: min(100%, 400px); transform-style: preserve-3d; }
+/* ordinateur : logo centré en haut, puis texte à gauche et tuiles à droite, alignés par le bas */
+@media (min-width: 901px) {
+  .team-text { grid-column: 1; grid-row: 2; align-self: start; }
+  .team-side { grid-column: 2; grid-row: 2; align-self: end; }
+}
+.dn-logo { position: relative; aspect-ratio: 3583 / 1013; transform-style: preserve-3d; }
+.dn-final { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.dn-piece, .dn-letter, .dn-sheen, .dn-guides, .dn-shadow { position: absolute; pointer-events: none; opacity: 0; }
+.dn-piece { top: 0; left: 0; width: 20.0949%; height: 100%; }
+.dn-letter { inset: 0; background: url(assets/logo-datanello-blanc.png) 0 0 / 100% 100% no-repeat; }
+.dn-sheen {
+  inset: 0; transform: translateZ(2px);
+  background: linear-gradient(105deg, transparent 0 40%, rgba(255, 255, 255, .95) 50%, transparent 60% 100%) 120% 0 / 300% 100% no-repeat;
+  -webkit-mask: url(assets/logo-datanello.png) 0 0 / 100% 100% no-repeat; mask: url(assets/logo-datanello.png) 0 0 / 100% 100% no-repeat;
+}
+.dn-guides { inset: 0; width: 100%; height: 100%; overflow: visible; }
+.dn-guides * { fill: none; stroke: #387abe; stroke-width: 1.2; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.dn-shadow { left: 6%; right: 6%; bottom: -26%; height: 22%; background: radial-gradient(closest-side, rgba(0, 30, 70, .28), transparent); }
+.dn-stage.is-armed .dn-final { opacity: 0; }
+.dn-stage.is-done .dn-final { opacity: 1; }
+.dn-stage.is-done :is(.dn-piece, .dn-letter, .dn-sheen, .dn-guides, .dn-shadow) { display: none; }
+.dn-stage.is-done { cursor: pointer; }
+@media (max-width: 640px) { .dn-world { width: 240px; } }
+.team-card .eyebrow, .team-card .accent { color: #fff; }
+.team-card .lead { color: #fff; max-width: none; }
+/* mise en avant : question manuscrite, puis un escalier qui monte du site au logiciel complet */
+.team-more { margin-top: 30px; }
+.team-more-q { font-family: var(--hand); font-size: 30px; line-height: 1.1; color: #8fd6f2; rotate: -1.5deg; transform-origin: left; }
+.team-scale { display: flex; align-items: flex-end; gap: 10px; margin: 18px 0 16px; padding: 0; list-style: none; max-width: 460px; }
+.team-scale li { flex: 1; display: grid; gap: 8px; font-size: 13px; font-weight: 500; line-height: 1.25; color: rgba(255, 255, 255, .75); }
+/* le libellé au-dessus, la marche en dessous : toutes les marches partent de la même ligne */
+.team-step {
+  grid-row: 2; display: block; height: 26px; border-radius: 8px 8px 3px 3px;
+  background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .28);
+  transform-origin: bottom; transition: transform .7s cubic-bezier(.2, .8, .2, 1);
+}
+.team-scale li:nth-child(2) .team-step { height: 46px; }
+.team-scale .is-top { color: #fff; font-weight: 700; }
+.team-scale .is-top .team-step {
+  height: 72px; border: 0; position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #27abe1, #387abe);
+  box-shadow: 0 12px 30px -8px rgba(39, 171, 225, .6);
+}
+/* reflet qui passe sur la dernière marche */
+.team-scale .is-top .team-step::after {
+  content: ""; position: absolute; inset: 0; translate: -120% 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+}
+.team-more-a { color: #fff; font-size: 16px; line-height: 1.5; max-width: 460px; }
+/* les marches poussent l'une après l'autre quand le bloc apparaît */
+.team-card.reveal .team-step { transform: scaleY(0); }
+.team-card.is-in .team-step { transform: none; }
+.team-card.is-in .team-scale li:nth-child(1) .team-step { transition-delay: .5s; }
+.team-card.is-in .team-scale li:nth-child(2) .team-step { transition-delay: .65s; }
+.team-card.is-in .team-scale li:nth-child(3) .team-step { transition-delay: .8s; }
+.team-card.is-in .team-scale .is-top .team-step::after { animation: team-shine 1.2s 1.5s ease-in-out forwards; }
+@keyframes team-shine { to { translate: 120% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .team-card.reveal .team-step { transform: none; transition: none; }
+  .team-card.is-in .team-scale .is-top .team-step::after { animation: none; }
+}
+.team-points { display: grid; gap: 14px; margin: 0 0 32px; }
+.team-point {
+  position: relative; overflow: hidden; display: grid; align-items: center; min-height: 80px;
+  padding: 16px 26px; border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .03));
+  box-shadow: 0 10px 30px -18px rgba(0, 20, 40, .6);
+  transform-origin: 50% 50%;
+  transition: transform .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s, background .35s;
+}
+.team-point > div { position: relative; z-index: 1; max-width: 60%; }
+.team-point strong { display: block; font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+.team-point div span { display: block; color: #fff; font-size: 15px; line-height: 1.5; }
+/* seul le titre est visible ; au survol, il remonte et la description apparaît dessous,
+   sans changer la taille de la tuile (sur écran tactile, titre et description restent affichés) */
+@media (hover: hover) {
+  .team-point { height: 120px; min-height: 0; }
+  .team-point > div { display: flex; flex-direction: column; justify-content: center; height: 100%; max-width: 64%; }
+  .team-point strong { margin: 0; transition: margin-bottom .45s cubic-bezier(.2, .8, .2, 1); }
+  .team-point div span {
+    font-size: 14px; line-height: 1.4; max-height: 0; opacity: 0; overflow: hidden;
+    transition: max-height .45s cubic-bezier(.2, .8, .2, 1), opacity .3s ease;
+  }
+  .team-point:hover strong { margin-bottom: 4px; }
+  .team-point:hover div span { max-height: 4.5em; opacity: 1; transition-delay: 0s, .1s; }
+}
+/* dessin au trait fin (même style que les offres), en blanc : en haut à droite, volontairement coupé par la carte */
+.team-draw {
+  position: absolute; top: -24px; right: -40px; width: 180px; height: 144px; pointer-events: none;
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1); transform-origin: left top;
+}
+.team-point:nth-child(3) .team-draw { top: -36px; }
+.team-draw * { fill: none; stroke: rgba(255, 255, 255, .92); stroke-width: .8; stroke-linecap: round; stroke-linejoin: round; }
+.team-draw .fine { stroke-width: .55; }
+.team-draw .key { stroke-width: .4; }
+@media (hover: hover) {
+  /* la tuile tourne sur elle-même (axe vertical au centre) : le côté gauche vient vers l'avant, le droit recule */
+  .team-point:hover {
+    transform: perspective(900px) rotateY(10deg);
+    box-shadow: 0 24px 40px -20px rgba(0, 20, 40, .75);
+    background: linear-gradient(135deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, .05));
+  }
+  .team-point:hover .team-draw { transform: scale(1.06) rotate(-1.5deg); }
+}
+/* le dessin se trace trait par trait quand le bloc apparaît (--d : ordre du trait, --t : décalage de la tuile) */
+.team-card.reveal .team-draw * { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset .7s ease, opacity .3s ease; }
+.team-card.is-in .team-draw * { stroke-dashoffset: 0; opacity: 1; transition-delay: calc(var(--d, 0s) + var(--t, 0s)); }
+.team-point:nth-child(1) { --t: .5s; }
+.team-point:nth-child(2) { --t: .7s; }
+.team-point:nth-child(3) { --t: .9s; }
+/* entrée en cascade quand le bloc apparaît */
+.team-card.reveal .team-point { opacity: 0; translate: 28px 0; }
+.team-card.is-in .team-point { animation: team-in .8s cubic-bezier(.2, .8, .2, 1) forwards; }
+.team-card.is-in .team-point:nth-child(1) { animation-delay: .25s; }
+.team-card.is-in .team-point:nth-child(2) { animation-delay: .4s; }
+.team-card.is-in .team-point:nth-child(3) { animation-delay: .55s; }
+@keyframes team-in { to { opacity: 1; translate: 0 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .team-point, .team-draw { transition: none; }
+  .team-card.reveal .team-point { opacity: 1; translate: none; animation: none; }
+  .team-card.reveal .team-draw * { stroke-dashoffset: 0; opacity: 1; transition: none; }
+}
+@media (max-width: 900px) { .team-card { grid-template-columns: 1fr; } }
 
 /* ---------- Questions fréquentes ---------- */
 .faq { padding-top: 0; }
