@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Création de site web à Nancy · Marine Ruez, webdesigner indépendante</title>
+  <meta name="description" content="Création de site vitrine à Nancy pour les artisans, commerçants, indépendants et associations : un site unique, adapté au mobile, bien référencé sur Google. Devis gratuit.">
+  <link rel="canonical" href="https://marineruez.fr/creation-site-web-nancy/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Marine Ruez">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Marine Ruez">
+  <meta property="og:url" content="https://marineruez.fr/creation-site-web-nancy/">
+  <meta property="og:title" content="Création de site web à Nancy · Marine Ruez">
+  <meta property="og:description" content="Un site vitrine unique, adapté au mobile et bien référencé, pour les petites structures de Nancy et du Grand Est.">
+  <meta property="og:image" content="https://marineruez.fr/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Données structurées : service, fil d'Ariane et questions fréquentes -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": "https://marineruez.fr/creation-site-web-nancy/#service",
+        "name": "Création de site web à Nancy",
+        "serviceType": "Création de site web",
+        "url": "https://marineruez.fr/creation-site-web-nancy/",
+        "description": "Création de sites vitrines et de landing pages, adaptés au mobile et pensés pour le référencement, pour les petites structures de Nancy et du Grand Est.",
+        "provider": { "@id": "https://marineruez.fr/#service" },
+        "areaServed": [{ "@type": "City", "name": "Nancy" }, { "@type": "AdministrativeArea", "name": "Métropole du Grand Nancy" }, { "@type": "AdministrativeArea", "name": "Meurthe-et-Moselle" }, { "@type": "AdministrativeArea", "name": "Grand Est" }],
+        "offers": { "@type": "Offer", "priceCurrency": "EUR", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1800, "priceCurrency": "EUR" } }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://marineruez.fr/" },
+          { "@type": "ListItem", "position": 2, "name": "Création de site web à Nancy", "item": "https://marineruez.fr/creation-site-web-nancy/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Combien coûte un site vitrine à Nancy ?", "acceptedAnswer": { "@type": "Answer", "text": "Un site vitrine coûte dès 1 800 €, selon le nombre de pages et les fonctionnalités. Le devis est personnalisé et gratuit." } },
+          { "@type": "Question", "name": "Combien de temps faut-il pour créer un site ?", "acceptedAnswer": { "@type": "Answer", "text": "Cela dépend du projet et de la disponibilité des contenus (textes, photos). Je vous donne un planning précis avec le devis." } },
+          { "@type": "Question", "name": "Mon site sera-t-il visible sur Google ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, le site est construit pour le référencement : textes qui reprennent les mots que tapent vos clients, pages rapides, adaptées au mobile, données structurées, et inscription sur Google Search Console. Je vous aide aussi à créer votre fiche Google Business Profile." } },
+          { "@type": "Question", "name": "Pourrai-je modifier mon site moi-même ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Je vous forme à la fin du projet pour que vous soyez autonome sur les mises à jour courantes." } },
+          { "@type": "Question", "name": "Travaillez-vous uniquement à Nancy ?", "acceptedAnswer": { "@type": "Answer", "text": "Je suis basée à Nancy et je travaille avec des clients de Nancy, du Grand Nancy et du Grand Est, et partout en France à distance." } }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Serif+Display&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    /* Styles propres à cette page, avec les couleurs du site */
+    .page-hero { padding: 150px var(--gutter) 40px; max-width: calc(var(--content) + 2 * 64px); margin: 0 auto; text-align: center; }
+    .page-hero h1 { font-size: clamp(40px, 5.6vw, 72px); font-weight: 700; letter-spacing: -0.03em; max-width: 900px; margin: 0 auto; }
+    .page-hero .lead { max-width: 680px; margin-left: auto; margin-right: auto; }
+    .page-hero .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 28px; margin-top: 34px; }
+    .crumbs { font-size: 14px; color: var(--muted); margin-bottom: 26px; }
+    .crumbs a { text-decoration: none; }
+    .crumbs a:hover { color: var(--accent); }
+    .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 40px; max-width: 900px; }
+    .checks li { position: relative; padding-left: 28px; color: var(--ink-soft); }
+    .checks li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+    .checks strong { color: var(--ink); }
+    .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; counter-reset: step; }
+    .steps li { counter-increment: step; border-top: 2px solid var(--line); padding-top: 18px; }
+    .steps li::before { content: "0" counter(step); display: block; font-family: var(--serif); font-size: 44px; color: var(--accent); line-height: 1; margin-bottom: 12px; }
+    .steps h3 { font-size: 21px; margin-bottom: 8px; }
+    .steps p { color: var(--ink-soft); }
+    .price { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; background: var(--accent-soft); border-radius: var(--radius); padding: 30px; max-width: 900px; }
+    .price strong { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -0.02em; }
+    .price p { color: var(--ink-soft); flex: 1 1 280px; }
+    .refs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .ref img { border-radius: var(--radius); aspect-ratio: 4 / 3; object-fit: cover; width: 100%; background: var(--bg-soft); }
+    .ref p { margin-top: 12px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .ref h3 { font-size: 20px; margin-top: 4px; }
+    .cta-band { text-align: center; }
+    .cta-band .lead { margin: 18px auto 34px; }
+    .section-tight { padding-top: clamp(40px, 6vw, 80px); padding-bottom: clamp(40px, 6vw, 80px); }
+    @media (max-width: 900px) {
+      .page-hero { padding-top: 110px; }
+      .steps, .refs, .checks { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* ---------- Animations de la page ---------- */
+    /* introduction : les lignes apparaissent l'une après l'autre au chargement */
+    .page-hero > * { animation: hero-in .8s cubic-bezier(.2, .8, .2, 1) both; }
+    .page-hero > :nth-child(2) { animation-delay: .1s; } .page-hero > :nth-child(3) { animation-delay: .2s; }
+    .page-hero > :nth-child(4) { animation-delay: .35s; } .page-hero > :nth-child(5) { animation-delay: .5s; }
+    @keyframes hero-in { from { opacity: 0; transform: translateY(22px); } }
+    /* mots en couleur : un surlignage rose se dessine dessous */
+    .page-hero h1 .accent, .title .accent {
+      background: linear-gradient(var(--accent-soft), var(--accent-soft)) no-repeat 0 88% / 0 .3em;
+      transition: background-size .9s cubic-bezier(.2, .8, .2, 1) .35s;
+    }
+    .page-hero h1 .accent { animation: hl-draw .9s .7s cubic-bezier(.2, .8, .2, 1) forwards; }
+    @keyframes hl-draw { to { background-size: 100% .3em; } }
+    .reveal.is-in .title .accent, .title.reveal.is-in .accent { background-size: 100% .3em; }
+    /* apparitions au défilement : chaque élément d'un groupe arrive un peu après le précédent (--rd, posé en JS) ;
+       :nth-child(n) pour passer devant les délais génériques de styles.css */
+    main .reveal:nth-child(n) { transition-delay: var(--rd, 0s); }
+    /* inclus : les lignes glissent depuis la gauche et la coche apparaît */
+    .checks li.reveal { transform: translateX(-18px); }
+    .checks li.reveal.is-in { transform: none; }
+    .checks li::before { display: inline-block; transform: scale(0); transition: transform .45s cubic-bezier(.3, 1.6, .5, 1); }
+    .checks li.is-in::before { transform: none; transition-delay: calc(var(--rd, 0s) + .3s); }
+    /* étapes : le trait du haut se dessine, en rose */
+    .steps li { border-top: 0; background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 0 / 0 2px, linear-gradient(var(--line), var(--line)) no-repeat 0 0 / 100% 2px; }
+    main .steps li.reveal:nth-child(n) { transition: opacity .7s ease, transform .7s ease, background-size 1s cubic-bezier(.2, .8, .2, 1); transition-delay: var(--rd, 0s), var(--rd, 0s), calc(var(--rd, 0s) + .3s); }
+    /* bouton du bas : une fois apparu, il réagit tout de suite au survol */
+    main .btn.reveal.is-in:nth-child(n) { transition: opacity .7s ease, transform .2s ease, background .2s; transition-delay: var(--rd, 0s), 0s, 0s; }
+    .steps li.is-in { background-size: 100% 2px, 100% 2px; }
+    /* tarif : le bloc grandit légèrement en apparaissant */
+    .price.reveal { transform: translateY(24px) scale(.96); }
+    .price.reveal.is-in { transform: none; }
+    /* tarif : tuile qui tourne sur elle-même au survol (skill tuile-rotation) ;
+       le délai d'apparition ne touche que l'opacité, pour que la rotation réponde tout de suite */
+    .price { transform-origin: 50% 50%; box-shadow: 0 10px 30px -22px rgba(43, 43, 46, .35); }
+    main .price.reveal.is-in:nth-child(n) {
+      transition: opacity .7s ease, transform .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s ease;
+      transition-delay: var(--rd, 0s), 0s, 0s;
+    }
+    /* réalisations : l'image se soulève au survol */
+    .ref img { transition: transform .45s cubic-bezier(.2, .8, .2, 1), box-shadow .45s ease; }
+    /* questions : la réponse se déplie en douceur */
+    .faq details[open] p { animation: faq-open .45s ease; }
+    @keyframes faq-open { from { opacity: 0; transform: translateY(-8px); } }
+    @media (hover: hover) {
+      .ref:hover img { transform: translateY(-8px); box-shadow: 0 26px 40px -24px rgba(43, 43, 46, .45); }
+      /* tarif : le côté gauche vient vers l'avant, le droit recule ; angle plus doux car la tuile est large */
+      .price.reveal.is-in:hover { transform: perspective(1200px) rotateY(8deg); box-shadow: 0 30px 50px -28px rgba(43, 43, 46, .45); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .checks li.reveal, .price.reveal { transform: none; }
+      .checks li::before { transform: none; }
+      .page-hero h1 .accent, .title .accent { background-size: 100% .3em; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <a href="../" class="logo" aria-label="Accueil">M<span>r</span></a>
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="../#services">services</a>
+      <a href="./" class="is-active" aria-current="page">site web</a>
+      <a href="../#projets">projets</a>
+      <a href="../#offres">offres</a>
+      <a href="#faq">questions</a>
+      <a href="../#contact">contact</a>
+      <a href="../#contact" class="nav-rdv">Contactez-moi</a>
+    </nav>
+    <a href="../#contact" class="call">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5z"/></svg>
+      Contactez-moi
+    </a>
+    <button class="burger" aria-label="Ouvrir le menu" aria-controls="nav" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <p class="crumbs"><a href="../">Accueil</a> › Création de site web à Nancy</p>
+      <p class="eyebrow">Webdesigner indépendante à Nancy</p>
+      <h1>Création de site web <span class="accent">à Nancy</span></h1>
+      <p class="lead">Un site vitrine unique, qui vous ressemble, qui donne envie de vous contacter, et que vos clients trouvent sur Google. Pour les artisans, commerçants, indépendants, cabinets et associations de Nancy et du Grand Est.</p>
+      <div class="hero-ctas">
+        <a href="../#contact" class="btn">Demander un devis gratuit</a>
+        <a href="../#projets" class="link-arrow">Voir mes réalisations</a>
+      </div>
+    </section>
+
+    <section class="section section-tight">
+      <div class="section-head">
+        <p class="eyebrow">Ce qui est inclus</p>
+        <h2 class="title">Votre site vitrine, <span class="accent">clé en main</span></h2>
+      </div>
+      <ul class="checks">
+        <li><strong>Autant de pages que nécessaire</strong> (accueil, services, réalisations, à propos, contact…)</li>
+        <li><strong>Parfaitement adapté au mobile</strong>, où se font la plupart des recherches</li>
+        <li><strong>Formulaire de contact</strong>, avec un email de confirmation automatique</li>
+        <li><strong>Référencement local</strong>&nbsp;: textes, titres et données structurées pour Nancy</li>
+        <li><strong>Design à votre image</strong>, en accord avec votre logo et vos couleurs</li>
+        <li><strong>Mise en ligne</strong> et inscription sur Google Search Console</li>
+        <li><strong>Formation</strong> pour que vous puissiez faire vos mises à jour</li>
+        <li><strong>Landing pages</strong> en option, une page par offre ou par type de client</li>
+      </ul>
+    </section>
+
+    <section class="section section-tight">
+      <div class="section-head">
+        <p class="eyebrow">Comment on travaille</p>
+        <h2 class="title">Trois <span class="accent">étapes</span></h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Analyse du besoin</h3>
+          <p>On se rencontre, à Nancy ou en visio&nbsp;: vos objectifs, vos clients, ce qui vous différencie.</p>
+        </li>
+        <li>
+          <h3>Réalisation</h3>
+          <p>Plusieurs propositions de design, puis la réalisation du site et sa mise en ligne.</p>
+        </li>
+        <li>
+          <h3>Formation</h3>
+          <p>Je vous forme pour que vous soyez autonome au quotidien avec votre site.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section section-tight">
+      <div class="section-head">
+        <p class="eyebrow">Tarif</p>
+        <h2 class="title">Combien coûte <span class="accent">un site vitrine</span>&nbsp;?</h2>
+      </div>
+      <div class="price">
+        <strong>Dès 1&nbsp;800&nbsp;€</strong>
+        <p>Selon le nombre de pages et les fonctionnalités. Le devis est précis et gratuit, après un premier échange. Besoin aussi d’un logo&nbsp;? Le Pack Lancement (identité visuelle + site) commence à 2&nbsp;900&nbsp;€.</p>
+      </div>
+    </section>
+
+    <section class="section section-tight">
+      <div class="section-head">
+        <p class="eyebrow">Réalisations</p>
+        <h2 class="title">Quelques <span class="accent">sites</span> réalisés</h2>
+      </div>
+      <div class="refs">
+        <article class="ref">
+          <img src="../assets/realisations/realisation-3.jpg" alt="Les trois landing pages Construction, Cybersécurité et Programmes internationaux" loading="lazy" onerror="this.remove()">
+          <p>Courtier en assurances</p>
+          <h3>Un site vitrine et une page par offre</h3>
+        </article>
+        <article class="ref">
+          <img src="../assets/projets/site-gerontopole-vignette.jpg" alt="Le site affiché sur ordinateur et sur téléphone : page d’accueil et actualités" loading="lazy" onerror="this.remove()">
+          <p>Réseau de recherche</p>
+          <h3>Une identité déclinée jusqu’au site web</h3>
+        </article>
+        <article class="ref">
+          <img src="../assets/projets/identite-chirurgie.jpg" alt="Planche d’identité : logo, couleurs, typographies et aperçu" loading="lazy" onerror="this.remove()">
+          <p>Chirurgien orthopédiste</p>
+          <h3>Un logo, une charte et un site qui inspirent confiance</h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="section faq section-tight" id="faq">
+      <div class="section-head">
+        <p class="eyebrow">Questions fréquentes</p>
+        <h2 class="title">Vous vous <span class="accent">demandez</span></h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Combien coûte un site vitrine à Nancy&nbsp;?</summary>
+          <p>Un site vitrine coûte dès 1&nbsp;800&nbsp;€, selon le nombre de pages et les fonctionnalités. Le devis est personnalisé et gratuit.</p>
+        </details>
+        <details>
+          <summary>Combien de temps faut-il pour créer un site&nbsp;?</summary>
+          <p>Cela dépend du projet et de la disponibilité des contenus (textes, photos). Je vous donne un planning précis avec le devis.</p>
+        </details>
+        <details>
+          <summary>Mon site sera-t-il visible sur Google&nbsp;?</summary>
+          <p>Oui, le site est construit pour le référencement&nbsp;: textes qui reprennent les mots que tapent vos clients, pages rapides, adaptées au mobile, données structurées, et inscription sur Google Search Console. Je vous aide aussi à créer votre fiche Google Business Profile.</p>
+        </details>
+        <details>
+          <summary>Pourrai-je modifier mon site moi-même&nbsp;?</summary>
+          <p>Oui. Je vous forme à la fin du projet pour que vous soyez autonome sur les mises à jour courantes.</p>
+        </details>
+        <details>
+          <summary>Travaillez-vous uniquement à Nancy&nbsp;?</summary>
+          <p>Je suis basée à Nancy et je travaille avec des clients de Nancy, du Grand Nancy et du Grand Est, et partout en France à distance.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section cta-band section-tight">
+      <h2 class="title">Parlons de <span class="accent">votre site</span></h2>
+      <p class="lead">Racontez-moi votre projet&nbsp;: je vous réponds rapidement, avec un devis gratuit.</p>
+      <a href="../#contact" class="btn">Me contacter</a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Marine Ruez · Création de site web à Nancy · Une communication qui donne envie, et qui tourne toute seule</p>
+    <p class="footer-links"><a href="../">Accueil</a> · <a href="https://www.linkedin.com/in/marine-ruez-2370468b/" target="_blank" rel="noopener me">LinkedIn</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const burger = document.querySelector(".burger");
+    const nav = document.getElementById("nav");
+    burger.addEventListener("click", () => {
+      const open = burger.getAttribute("aria-expanded") === "true";
+      burger.setAttribute("aria-expanded", String(!open));
+      nav.classList.toggle("is-open", !open);
+    });
+    const topbar = document.querySelector(".topbar");
+    addEventListener("scroll", () => topbar.classList.toggle("is-scrolled", scrollY > 10), { passive: true });
+
+    // Apparitions au défilement : les éléments d'un même groupe arrivent l'un après l'autre
+    const revealer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add("is-in"), revealer.unobserve(e.target))),
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+    document.querySelectorAll(".section-head, .checks li, .steps li, .price, .ref, .faq details, .cta-band > *").forEach((el) => {
+      el.classList.add("reveal");
+      el.style.setProperty("--rd", [...el.parentElement.children].indexOf(el) * 0.08 + "s");
+      revealer.observe(el);
+    });
+  </script>
+</body>
+</html>

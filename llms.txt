@@ -1,8 +1,8 @@
-# Marine Ruez · Informaticienne indépendante à Nancy
+# Marine Ruez · Webdesigner et création de site web à Nancy
 
 *Une communication qui donne envie, et qui tourne toute seule.*
 
-> Marine Ruez est informaticienne indépendante basée à Nancy (Grand Est, France). Elle conçoit des sites web, des identités visuelles et des supports imprimés, et met en place des automatisations avec l'IA. Elle aide les petites structures (artisans, commerçants, indépendants, associations, cabinets) à attirer plus de clients grâce à une image unique et soignée (identité visuelle, site web, supports imprimés), et à gagner du temps grâce aux automatisations et à l'IA. Elle intervient à Nancy et partout en France, à distance. 10 ans d'expérience dans l'informatique de santé, 6 ans en indépendante.
+> Marine Ruez est webdesigner et créatrice de sites web indépendante, basée à Nancy (Grand Est, France), avec un parcours d'informaticienne. Elle conçoit des sites web, des identités visuelles et des supports imprimés, et met en place des automatisations avec l'IA. Elle aide les petites structures (artisans, commerçants, indépendants, associations, cabinets) à attirer plus de clients grâce à une image unique et soignée (identité visuelle, site web, supports imprimés), et à gagner du temps grâce aux automatisations et à l'IA. Elle intervient à Nancy et partout en France, à distance. 10 ans d'expérience dans l'informatique de santé, 6 ans en indépendante.
 
 ## Ce qu'elle apporte
 
@@ -12,7 +12,7 @@
 
 ## Services
 
-- Création de site web : site vitrine, landing pages, refonte, design pensé pour le mobile.
+- Création de site web à Nancy : site vitrine, landing pages, refonte, design pensé pour le mobile (https://marineruez.fr/creation-site-web-nancy/).
 - Identité visuelle : logo, couleurs, typographies, charte graphique.
 - Design UX et UI : interfaces de logiciels, parcours utilisateurs, prototypes, vision produit.
 - Supports imprimés : kakémonos, flyers, affiches, plaquettes, cartes de visite, livrés prêts pour l'imprimeur.
